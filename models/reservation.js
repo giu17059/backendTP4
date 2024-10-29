@@ -3,23 +3,17 @@ const sequelize = require('../config/database'); // Importar la configuración d
 
 // Definir el modelo de usuario
 const Reservation = sequelize.define('Reservation', {
-    id:{
+    idUser:{
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement:true
-
+        primaryKey:true,
     },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
+    idHorario: {
+        type: DataTypes.INTEGER,
+        primaryKey:true,
     },
-    email: {
-        type: DataTypes.STRING,
+    cantidad: {
+        type: DataTypes.INTEGER,
         unique: true,
-        allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING,
         allowNull: false
     }
 });
