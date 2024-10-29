@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 // Ruta para obtener un usuario por ID
 router.get('/:id', async (req, res) => {
     try {

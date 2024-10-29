@@ -4,15 +4,16 @@ const User = require('../models/user'); // Importar el modelo User
 
 // Crear un nuevo usuario
 exports.createUser = async (req, res) => {
-    const { email, password } = req.body; // Obtener datos del cuerpo de la solicitud
+    const { name, email, password } = req.body; // Obtener datos del cuerpo de la solicitud
     try {
-        const newUser = await User.create({ email, password }); // Crear un nuevo usuario en la base de datos
+        const newUser = await User.create({ name, email, password }); // Crear un nuevo usuario en la base de datos
         res.status(201).json(newUser); // Devolver el usuario creado
     } catch (error) {
         console.error('Error al crear usuario:', error);
         res.status(500).json({ error: 'Error al crear usuario' }); // Manejo de errores
     }
 };
+
 
 // Obtener todos los usuarios
 exports.getAllUsers = async (req, res) => {
@@ -53,7 +54,7 @@ exports.deleteUser = async (req, res) => {
         const user = await User.findByPk(id); // Buscar el usuario por su ID
         if (user) {
             await user.destroy(); // Borrar el usuario de la base de datos
-            res.status(204).send(); // No content
+            res.status(204).send();// No content
         } else {
             res.status(404).json({ error: 'User not found' }); // Manejo si el usuario no se encuentra
         }
