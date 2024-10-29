@@ -3,6 +3,12 @@ const sequelize = require('../config/database'); // Importar la configuración d
 
 // Definir el modelo de usuario
 const User = sequelize.define('User', {
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement:true
+
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false

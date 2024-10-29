@@ -1,0 +1,64 @@
+// controllers/userController.js
+
+const User = require('../models/user'); // Importar el modelo User
+
+// Crear un nuevo usuario
+exports.createUser = async (req, res) => {
+    const { email, password } = req.body; // Obtener datos del cuerpo de la solicitud
+    try {
+        const newUser = await User.create({ email, password }); // Crear un nuevo usuario en la base de datos
+        res.status(201).json(newUser); // Devolver el usuario creado
+    } catch (error) {
+        console.error('Error al crear usuario:', error);
+        res.status(500).json({ error: 'Error al crear usuario' }); // Manejo de errores
+    }
+};
+
+// Obtener todos los usuarios
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.findAll(); // Obtener todos los usuarios
+        res.status(200).json(users); // Devolver los usuarios encontrados
+    } catch (error) {
+        console.error('Error al obtener usuarios:', error);
+        res.status(500).json({ error: 'Error al obtener usuarios' }); // Manejo de errores
+    }
+};
+
+// Actualizar un usuario
+exports.updateUser = async (req, res) => {
+    const { id } = req.params; // Obtener el ID del usuario de los parámetros de la ruta
+    const { newEmail } = req.body; // Obtener el nuevo correo del cuerpo de la solicitud
+
+    try {
+        const user = await User.findByPk(id); // Buscar el usuario por su ID
+        if (user) {
+            user.email = newEmail; // Actualizar el correo
+            await user.save(); // Guardar los cambios en la base de datos
+            res.status(200).json(user); // Devolver el usuario actualizado
+        } else {
+            res.status(404).json({ error: 'User not found' }); // Manejo si el usuario no se encuentra
+        }
+    } catch (error) {
+        console.error('Error al actualizar usuario:', error);
+        res.status(500).json({ error: 'Error al actualizar usuario' }); // Manejo de errores
+    }
+};
+
+// Borrar un usuario
+exports.deleteUser = async (req, res) => {
+    const { id } = req.params; // Obtener el ID del usuario de los parámetros de la ruta
+
+    try {
+        const user = await User.findByPk(id); // Buscar el usuario por su ID
+        if (user) {
+            await user.destroy(); // Borrar el usuario de la base de datos
+            res.status(204).send(); // No content
+        } else {
+            res.status(404).json({ error: 'User not found' }); // Manejo si el usuario no se encuentra
+        }
+    } catch (error) {
+        console.error('Error al borrar usuario:', error);
+        res.status(500).json({ error: 'Error al borrar usuario' }); // Manejo de errores
+    }
+};

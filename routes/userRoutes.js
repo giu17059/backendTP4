@@ -21,5 +21,46 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+// Ruta para obtener un usuario por ID
+router.get('/:id', async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.id); // Obtener usuario por ID
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Ruta para actualizar un usuario
+router.put('/:id', async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        const updatedUser = await user.update(req.body);
+        res.json(updatedUser);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Ruta para eliminar un usuario
+router.delete('/:id', async (req, res) => {
+    try {
+        const user = await User.findByPk(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        await user.destroy();
+        res.status(204).send(); // Respuesta sin contenido
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 module.exports = router;
