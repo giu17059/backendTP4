@@ -6,17 +6,18 @@ const Reservation = sequelize.define('Reservation', {
     idUser:{
         type: DataTypes.INTEGER,
         primaryKey:true,
+        allowNull: false
     },
     idHorario: {
         type: DataTypes.INTEGER,
         primaryKey:true,
+        allowNull: false
     },
     cantidad: {
         type: DataTypes.INTEGER,
-        unique: true,
-        allowNull: false
+        allowNull: false,
     }
 });
 
 // Exportar el modelo
-module.exports = User;
+module.exports = Reservation;
