@@ -1,21 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const Reservation = require('../models/reservation'); // Importar el modelo de usuario
-const { createUser } = require('../controllers/reservationControlers');
+const { getAllReservations, createReservation, getReservation, updateReservation, deleteReservation } = require('../controllers/reservationControllers');
 
-// Ruta para obtener todos los usuarios
-router.get('/', getAllReservation);
+// Ruta para obtener todas las reservas
+router.get('/', getAllReservations);
 
-// Ruta para crear un nuevo usuario
-router.post('/', createReservation)
+// Ruta para crear una nueva reserva
+router.post('/', createReservation); // Asegúrate de que esta línea exista y esté correcta
 
-// Ruta para obtener un usuario por ID
-router.get('/:id', getUser);
+// Ruta para obtener una reserva por ID
+router.get('/:idUser/:idHorario', getReservation);
 
-// Ruta para actualizar un usuario
-router.put('/:id', updateUser);
+// Ruta para actualizar una reserva
+router.put('/:idUser/:idHorario', updateReservation);
 
-// Ruta para eliminar un usuario
-router.delete('/:id', userController.deleteUser);
+// Ruta para eliminar una reserva
+router.delete('/:idUser/:idHorario', deleteReservation);
 
 module.exports = router;

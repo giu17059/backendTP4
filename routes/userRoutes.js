@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user'); // Importar el modelo de usuario
-const { createUser } = require('../controllers/userControlers');
+const { createUser, getAllUsers, getUser, updateUser, deleteUser } = require('../controllers/userControllers');
 
 // Ruta para obtener todos los usuarios
 router.get('/', getAllUsers);
@@ -16,6 +16,6 @@ router.get('/:id', getUser);
 router.put('/:id', updateUser);
 
 // Ruta para eliminar un usuario
-router.delete('/:id', userController.deleteUser);
+router.delete('/:id', deleteUser);
 
 module.exports = router;
