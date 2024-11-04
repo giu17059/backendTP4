@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database'); // Importar la configuración de la base de datos
 
+
 // Definir el modelo de usuario
 const User = sequelize.define('User', {
     id:{
@@ -23,6 +24,9 @@ const User = sequelize.define('User', {
         allowNull: false
     }
 });
+
+
+
 
 // Exportar el modelo
 module.exports = User;

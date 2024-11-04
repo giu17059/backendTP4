@@ -14,11 +14,14 @@ const Sala = sequelize.define('Sala', {
     },
     cantidadAsientos: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            min: 0 // Asegura que cantidadAsientos no sea negativo
+        }
     }
 }, {
-    tableName: 'salas', // Puedes especificar el nombre de la tabla en la base de datos si quieres
-    timestamps: false // Desactiva las columnas createdAt y updatedAt si no las necesitas
+    tableName: 'salas', // Especificar el nombre de la tabla en la base de datos
+    timestamps: false // Cambia a true si necesitas createdAt y updatedAt
 });
 
 module.exports = Sala;

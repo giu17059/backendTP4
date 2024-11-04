@@ -1,5 +1,6 @@
+const { User} = require('../models');
 const Reservation = require('../models/reservation');
-
+const { Horario } = require('../models');
 // Obtener todas las reservas
 exports.getAllReservations = async (req, res) => {
     try {
@@ -13,8 +14,31 @@ exports.getAllReservations = async (req, res) => {
 
 // Crear una nueva reserva
 exports.createReservation = async (req, res) => {
-    try {
-        const { idUser, idHorario, cantidad } = req.body;
+    const { idUser, idHorario, cantidad }= req.body;
+
+    try{
+        const user = await User.findByPk(idUser);
+        if (!user){
+            return res.status(404).json({error: "Usuario no encontrado"});
+        }
+    
+        const horario = await Horario.findByPk(idHorario);
+        if(!horario){
+            return res.status(404).json({error: "Horario no encontrado"});
+        }
+
+        const totalReservado = await Reservation.sum('cantidad', {
+            where: { idHorario }
+        });
+
+        const asientosDisponibles = horario.Sala.cantidadAsientos - totalReservado;
+
+        if (cantidad > asientosDisponibles) {
+            return res.status(400).json({
+                error: `No hay suficientes asientos disponibles. Asientos disponibles: ${asientosDisponibles}`,
+            })
+        };
+
         const newReservation = await Reservation.create({ idUser, idHorario, cantidad });
         res.status(201).json(newReservation);
     } catch (error) {
@@ -37,6 +61,25 @@ exports.getReservation = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener reserva' });
     }
 };
+
+exports.getUserReservation = async (req, res) => {
+    try{
+        const {idUser} = req.params;
+        const reservation = await Reservation.findAll({where: {idUser}});
+        const user = await User.findByPk(idUser);
+        if(!user){
+            return res.status(404).json({error:'Usuario no encontrado'});
+        }
+        if(!reservation){
+            return res.status(404).json({error:'El usuario no tiene reservas'});
+        }
+        res.status(200).json(reservation);
+    }
+    catch(error){
+        console.error('Error al obtener reserva:', error);
+        res.status(500).json({ error: 'Error al obtener reserva' });
+    }
+}
 
 // Actualizar una reserva
 exports.updateReservation = async (req, res) => {
