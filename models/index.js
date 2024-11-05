@@ -5,15 +5,15 @@ const Movie = require('./movie');
 const Category = require('./category');
 const Reservation = require('./reservation');
 const Horario = require('./horario');
-
+const Author = require('./author');
 
 
 Movie.belongsTo(Category, { foreignKey: 'idCategoria' });
 Category.hasMany(Movie, { foreignKey: 'idCategoria' });
 
 
-//Movie.belongsTo(Author, { foreignKey: 'idAutor' });
-//Author.hasMany(Movie, { foreignKey: 'idAutor' });
+Movie.belongsTo(Author, { foreignKey: 'idAutor' });
+Author.hasMany(Movie, { foreignKey: 'idAutor' });
 
 
 Horario.belongsTo(Movie, { foreignKey: 'idPelicula' });
@@ -26,7 +26,7 @@ User.hasMany(Reservation, { foreignKey: 'idUser' });
 Reservation.belongsTo(Horario, { foreignKey: 'idHorario' });
 Horario.hasMany(Reservation, { foreignKey: 'idHorario' });
 
-Horario.belongsTo(Sala, { foreignKey: 'idHorario' });
+Horario.belongsTo(Sala, { foreignKey: 'idSala' });
 Sala.hasMany(Horario,{foreignKey: 'idSala'} )
 
 

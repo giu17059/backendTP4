@@ -3,7 +3,7 @@ const router = express.Router();
 const { getAllReservations, createReservation, getReservation, updateReservation, deleteReservation } = require('../controllers/reservationControllers');
 
 // Ruta para obtener todas las reservas
-router.get('/', getAllReservations);
+router.get('/', getAllReservations); 
 
 // Ruta para crear una nueva reserva
 router.post('/', createReservation); // Asegúrate de que esta línea exista y esté correcta

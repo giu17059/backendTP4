@@ -7,7 +7,8 @@ const categoryRoutes = require('./routes/categoryRoutes'); // Importa las rutas 
 const reservationRoutes = require('./routes/reservationRoutes');
 const salaRoutes = require('./routes/salaRoutes');
 const horariosRoutes = require('./routes/horariosRoutes'); 
-
+const movieRoutes = require('./routes/movieRoutes'); 
+const authorRoutes = require('./routes/authorRoutes');
 
 
 const app = express();
@@ -20,6 +21,8 @@ app.use('/api/categories', categoryRoutes); // Define el prefijo para las rutas 
 app.use('/api/reservations', reservationRoutes);
 app.use('/api/salas', salaRoutes);
 app.use('/api/horarios', horariosRoutes);
+app.use('/api/movies', movieRoutes);
+app.use('/api/authors', authorRoutes);
 
 
 // Conectar a la base de datos y sincronizar modelos
