@@ -5,7 +5,8 @@ const sequelize = require('./config/database'); // Importar la configuración de
 const userRoutes = require('./routes/userRoutes'); // Importar las rutas de usuario
 const categoryRoutes = require('./routes/categoryRoutes'); // Importa las rutas de categorías
 const reservationRoutes = require('./routes/reservationRoutes');
-const salaRoutes = require('./routes/salaRoutes'); 
+const salaRoutes = require('./routes/salaRoutes');
+const horariosRoutes = require('./routes/horariosRoutes'); 
 
 
 
@@ -18,6 +19,7 @@ app.use('/api/users', userRoutes); // Define el prefijo para las rutas de usuari
 app.use('/api/categories', categoryRoutes); // Define el prefijo para las rutas de categorías
 app.use('/api/reservations', reservationRoutes);
 app.use('/api/salas', salaRoutes);
+app.use('/api/horarios', horariosRoutes);
 
 
 // Conectar a la base de datos y sincronizar modelos
