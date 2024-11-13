@@ -19,7 +19,7 @@ const Movie  = require('../models/movie');
             res.status(500).json({message: 'Error al crear Movie'})
         }
     },
-    exports.obtenerMovie= async (req, res) => {
+    exports.obtenerMovies= async (req, res) => {
         try{
             const movies = await Movie.findAll();
 
@@ -27,6 +27,41 @@ const Movie  = require('../models/movie');
         } catch(error) {
             console.error(error);
             res.status(500).json({message: 'Error al obtener peliculas'})
+        }
+    };
+    exports.obtenerMovie = async (req, res) => {
+        try {
+            const movie = await Movie.findByPk(req.params.id);
+            if (!movie) {
+                return res.status(404).json({ error: 'Película no encontrada.' });
+            }
+            res.json(movie);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    };
+    exports.updateMovie = async (req, res) => {
+        try {
+            const movie = await Movie.findByPk(req.params.id);
+            if (!movie) {
+                return res.status(404).json({ error: 'Película no encontrada' });
+            }
+            const updatedMovie = await movie.update(req.body);
+            res.json(updatedMovie);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    };
+    exports.deleteMovie = async (req, res) => {
+        try {
+            const movie = await Movie.findByPk(req.params.id);
+            if (!movie) {
+                return res.status(404).json({ error: 'Película no encontrada' });
+            }
+            await movie.destroy();
+            res.status(204).send();
+        } catch (error) {
+            res.status(500).json({ error: error.message });
         }
     };
 
