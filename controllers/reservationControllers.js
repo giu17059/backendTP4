@@ -1,6 +1,8 @@
-const { User} = require('../models');
+const User  = require('../models/user');
 const Reservation = require('../models/reservation');
-const { Horario } = require('../models');
+const Horario  = require('../models/horario');
+const Sala  = require('../models/sala');
+
 // Obtener todas las reservas
 exports.getAllReservations = async (req, res) => {
     try {
@@ -12,7 +14,7 @@ exports.getAllReservations = async (req, res) => {
     }
 };
 
-// Crear una nueva reserva
+// Crear una nueva reserva 
 exports.createReservation = async (req, res) => {
     const { idUser, idHorario, cantidad }= req.body;
 
@@ -31,7 +33,7 @@ exports.createReservation = async (req, res) => {
             where: { idHorario }
         });
 
-        const asientosDisponibles = horario.Sala.cantidadAsientos - totalReservado;
+        const asientosDisponibles = horario.idSala.cantidadAsientos - totalReservado;//VER ESTA LINEA
 
         if (cantidad > asientosDisponibles) {
             return res.status(400).json({

@@ -1,4 +1,7 @@
-const { Horario, Sala, Movie} = require('../models');
+//const { Horario, Sala, Movie} = require('../models');
+const  Horario  = require('../models/horario');
+const Sala  = require('../models/sala');
+const Movie = require('../models/movie');
 
 // Obtener todas las reservas
 exports.getAllHorarios = async (req, res) => {
@@ -33,4 +36,15 @@ exports.createHorarios = async (req, res) =>{
         res.status(500).json({ error: 'Error al crear horarios' });
     }
 
+};
+exports.getHorario = async (req, res) => {
+    try {
+        const horario = await Horario.findByPk(req.params.id);
+        if (!horario) {
+            return res.status(404).json({ error: 'Categoría no encontrada' });
+        }
+        res.json(category);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };

@@ -24,4 +24,4 @@ const Sala = sequelize.define('Sala', {
     timestamps: false // Cambia a true si necesitas createdAt y updatedAt
 });
 
-module.exports = Sala;
+module.exports =  Sala ;

@@ -8,28 +8,26 @@ const Horario = require('./horario');
 const Author = require('./author');
 
 
-Movie.belongsTo(Category, { foreignKey: 'idCategoria' });
-Category.hasMany(Movie, { foreignKey: 'idCategoria' });
+Movie.belongsTo(Category, { foreignKey: 'idCategoria' });//listo
+Category.hasMany(Movie, { foreignKey: 'idCategoria' });//listo
 
+Movie.belongsTo(Author, { foreignKey: 'idAutor' });//listo
+Author.hasMany(Movie, { foreignKey: 'idAutor' });//listo
 
-Movie.belongsTo(Author, { foreignKey: 'idAutor' });
-Author.hasMany(Movie, { foreignKey: 'idAutor' });
+Horario.belongsTo(Movie, { foreignKey: 'idPelicula' });//listo
+Movie.hasMany(Horario, { foreignKey: 'idPelicula' });//listo
 
+Horario.belongsTo(Sala, { foreignKey: 'idSala' });//listo
+Sala.hasMany(Horario,{foreignKey: 'idSala'} );//listo
 
-Horario.belongsTo(Movie, { foreignKey: 'idPelicula' });
-Movie.hasMany(Horario, { foreignKey: 'idPelicula' });
+Reservation.belongsTo(User, { foreignKey: 'idUser' });//listo
+User.hasMany(Reservation, { foreignKey: 'idUser' });//listo
 
+Reservation.belongsTo(Horario, { foreignKey: 'idHorario' });//listo
+Horario.hasMany(Reservation, { foreignKey: 'idHorario' });//listo
 
-Reservation.belongsTo(User, { foreignKey: 'idUser' });
-User.hasMany(Reservation, { foreignKey: 'idUser' });
-
-Reservation.belongsTo(Horario, { foreignKey: 'idHorario' });
-Horario.hasMany(Reservation, { foreignKey: 'idHorario' });
-
-Horario.belongsTo(Sala, { foreignKey: 'idSala' });
-Sala.hasMany(Horario,{foreignKey: 'idSala'} )
-
-
+//Reservation.belongsTo(Movie, { foreignKey: 'movieId', targetKey: 'id' });
+//Movie.hasMany(Reservation, { foreignKey: 'movieId', sourceKey: 'id' });
 
 module.exports = {
     sequelize,

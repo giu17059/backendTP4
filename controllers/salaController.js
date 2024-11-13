@@ -1,5 +1,5 @@
 // controllers/salaController.js
-const { Sala } = require('../models');
+const Sala  = require('../models/sala');
 
 exports.getSalas = async (req, res) => {
     try {
@@ -22,5 +22,17 @@ exports.createSala = async (req, res) => {
     } catch (error) {
         console.error('Error al crear la sala:', error);
         res.status(500).json({ error: 'Error al crear sala', details: error.message });
+    }
+};
+
+exports.sala = async (req, res) => {
+    try {
+        const sala = await Sala.findByPk(req.params.id);
+        if (!sala) {
+            return res.status(404).json({ error: 'Categoría no encontrada' });
+        }
+        res.json(sala);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };

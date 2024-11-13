@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); 
 const cors = require('cors');
 const sequelize = require('./config/database'); // Importar la configuración de la base de datos
 const userRoutes = require('./routes/userRoutes'); // Importar las rutas de usuario
