@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { createUser, getAllUsers, getUser, updateUser, deleteUser } = require('../controllers/userControllers');
+const { createUser, getAllUsers, getUser, updateUser, deleteUser, getUserById } = require('../controllers/userControllers');
 
 // Ruta para obtener todos los usuarios
 router.get('/', getAllUsers);
