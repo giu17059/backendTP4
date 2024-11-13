@@ -1,6 +1,6 @@
 const {DataType, DataTypes} = require('sequelize');
 const sequelize = require('../config/database');
-const Categoria = require('./category');
+const Category = require('./category');
 const Author = require('./author');
 
 const Movie = sequelize.define('Movie',{
@@ -30,7 +30,7 @@ const Movie = sequelize.define('Movie',{
         type: DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model: 'author',
+            model: 'authors',
             key: 'id'
         }
     },
@@ -38,10 +38,13 @@ const Movie = sequelize.define('Movie',{
         type: DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model: 'category',
+            model: 'categorias', 
             key: 'id'
         }
     }
+},{
+    tableName: 'movies', // Especificar el nombre de la tabla en la base de datos
+    timestamps: false // Cambia a true si necesitas createdAt y updatedAt
 });
 
 

@@ -9,7 +9,7 @@ const Reservation = sequelize.define('Reservation', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: User,      // referencia al modelo User
+            model: 'users',      // referencia al modelo User
             key: 'id'         // clave primaria de la tabla User
         }
     },
@@ -17,7 +17,7 @@ const Reservation = sequelize.define('Reservation', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Horario,   // referencia al modelo Horario
+            model: 'horarios',   // referencia al modelo Horario
             key: 'id'         // clave primaria de la tabla Horario
         }
     },
@@ -25,6 +25,9 @@ const Reservation = sequelize.define('Reservation', {
         type: DataTypes.INTEGER,
         allowNull: false,
     }
+},{
+    tableName: 'reservations', // Especificar el nombre de la tabla en la base de datos
+    timestamps: false // Cambia a true si necesitas createdAt y updatedAt
 });
 
 

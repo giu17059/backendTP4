@@ -13,6 +13,9 @@ const Category = sequelize.define('Category', {
         allowNull: false,
         unique: true
     }
+},{
+    tableName: 'categorias', // Especificar el nombre de la tabla en la base de datos
+    timestamps: false // Cambia a true si necesitas createdAt y updatedAt
 });
 
 

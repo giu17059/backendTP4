@@ -1,5 +1,4 @@
 // controllers/userController.js 
-
 const User = require('../models/user'); // Importar el modelo User
 
 // Crear un nuevo usuario
