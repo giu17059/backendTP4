@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllReservations, createReservation, getReservation, updateReservation, deleteReservation } = require('../controllers/reservationControllers');
+const { getAllReservations, createReservation, getReservation, updateReservation, deleteReservation , getUserReservation} = require('../controllers/reservationControllers');
 
 // Ruta para obtener todas las reservas
 router.get('/', getAllReservations); 
@@ -10,6 +10,9 @@ router.post('/', createReservation); // Asegúrate de que esta línea exista y e
 
 // Ruta para obtener una reserva por ID
 router.get('/:idUser/:idHorario', getReservation);
+
+// Ruta para obtener reservas del usuario
+router.get('/:idUser', getUserReservation);
 
 // Ruta para actualizar una reserva
 router.put('/:idUser/:idHorario', updateReservation);

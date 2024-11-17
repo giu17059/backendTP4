@@ -2,6 +2,7 @@ const {DataType, DataTypes} = require('sequelize');
 const sequelize = require('../config/database');
 const Category = require('./category');
 const Author = require('./author');
+const Horario = require('./horario');
 
 const Movie = sequelize.define('Movie',{
     id:{

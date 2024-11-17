@@ -31,5 +31,13 @@ const Reservation = sequelize.define('Reservation', {
 });
 
 
+
 // Exportar el modelo
 module.exports = Reservation;
+
+Reservation.belongsTo(User, { foreignKey: 'idUser' });
+Reservation.belongsTo(Horario, { foreignKey: 'idHorario' });
+
+// Agregar las asociaciones correctas para las relaciones
+Horario.hasMany(Reservation, { foreignKey: 'idHorario' }); // Relación inversa
+User.hasMany(Reservation, { foreignKey: 'idUser' }); // Relación inversa

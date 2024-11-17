@@ -1,6 +1,7 @@
 const User  = require('../models/user');
 const Reservation = require('../models/reservation');
 const Horario  = require('../models/horario');
+const Movie  = require('../models/movie');
 const Sala  = require('../models/sala');
 
 // Obtener todas las reservas
@@ -67,7 +68,20 @@ exports.getReservation = async (req, res) => {
 exports.getUserReservation = async (req, res) => {
     try{
         const {idUser} = req.params;
-        const reservation = await Reservation.findAll({where: {idUser}});
+        const reservation = await Reservation.findAll({
+            where: {idUser},
+            include: [
+                {
+                model: Horario,
+                include: [
+                    {
+                        model: Movie
+                    }
+                ]
+                }
+            ]
+        });
+        console.log(reservation);
         const user = await User.findByPk(idUser);
         if(!user){
             return res.status(404).json({error:'Usuario no encontrado'});
@@ -78,8 +92,8 @@ exports.getUserReservation = async (req, res) => {
         res.status(200).json(reservation);
     }
     catch(error){
-        console.error('Error al obtener reserva:', error);
-        res.status(500).json({ error: 'Error al obtener reserva' });
+        console.error('Error al obtener reservas:', error);
+        res.status(500).json({ error: 'Error al obtener reservas' });
     }
 }
 
@@ -114,3 +128,5 @@ exports.deleteReservation = async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar reserva' });
     }
 };
+
+

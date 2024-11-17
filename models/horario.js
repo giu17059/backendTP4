@@ -1,7 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database'); 
+const Movie  = require('./movie');
 const { Sala } = require('./sala');
-const { Movie } = require('./movie');
+
 
 
 const Horario = sequelize.define('Horario', {
@@ -36,5 +37,7 @@ const Horario = sequelize.define('Horario', {
     timestamps: false // Cambia a true si necesitas createdAt y updatedAt
 });
 
-
 module.exports = Horario;
+
+Horario.belongsTo(Movie, { foreignKey: 'idPelicula' });
+Movie.hasMany(Horario, { foreignKey: 'idPelicula' }); // Relación inversa
