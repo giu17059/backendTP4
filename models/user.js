@@ -26,7 +26,7 @@ const User = sequelize.define('User', {
 },{
     tableName: 'users', // Especificar el nombre de la tabla en la base de datos
     timestamps: false // Cambia a true si necesitas createdAt y updatedAt
-});;
+});
 
 
 

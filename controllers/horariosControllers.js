@@ -43,7 +43,7 @@ exports.getHorario = async (req, res) => {
         if (!horario) {
             return res.status(404).json({ error: 'Horario no encontrad' });
         }
-        res.json(category);
+        res.json(horario);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -67,5 +67,18 @@ exports.getHorariobyMovie = async (req, res) => {
     } catch (error) {
         console.error('Error al obtener horarios:', error);
         res.status(500).json({ error: 'Ocurrió un error al obtener los horarios' });
+    }
+};
+
+exports.deleteHorario = async (req, res) => {
+    try {
+        const horario = await Horario.findByPk(req.params.id);
+        if (!horario) {
+            return res.status(404).json({ error: 'Horario no encontrado' });
+        }
+        await horario.destroy();
+        res.status(204).send();
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };

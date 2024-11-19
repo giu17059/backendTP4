@@ -74,7 +74,7 @@ exports.getUserById = async (req, res) => {
 
 // Obtener todos los usuarios
 exports.getAllUsers = async (req, res) => {
-    try {
+    try { 
         const users = await User.findAll(); // Obtener todos los usuarios
         res.status(200).json(users); // Devolver los usuarios encontrados
     } catch (error) {
